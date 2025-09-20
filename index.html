@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Commerce Product Showcase</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background: #f9f9f9;
+        color: #333;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      /* Filter buttons */
+      .filters {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .filters button {
+        padding: 10px 20px;
+        margin: 5px;
+        border: none;
+        background: #333;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .filters button:hover,
+      .filters button.active {
+        background: #ff6600;
+      }
+
+      /* Product grid */
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+      }
+
+      .product {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .product:hover {
+        transform: translateY(-5px);
+      }
+
+      .product img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+      }
+
+      .product .info {
+        padding: 15px;
+        text-align: center;
+      }
+
+      .product .info h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .product .info p {
+        color: #777;
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+
+      .product .info span {
+        font-weight: bold;
+        color: #ff6600;
+      }
+
+      /* Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .modal-content {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+        position: relative;
+      }
+
+      .modal-content img {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 15px;
+      }
+
+      .modal-content h2 {
+        margin-bottom: 10px;
+      }
+
+      .modal-content p {
+        margin-bottom: 10px;
+        color: #555;
+      }
+
+      .modal-content span {
+        font-weight: bold;
+        color: #ff6600;
+        font-size: 18px;
+      }
+
+      .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 22px;
+        cursor: pointer;
+      }
+      
+
+    </style>
+  </head>
+  <body>
+        <h1>OUR PRODUCTS</h1>
+    <!-- Filter Buttons -->
+    <div class="filters">
+      <button class="active" onclick="filterProducts('all')">All</button>
+      <button onclick="filterProducts('electronics')">Electronics</button>
+      <button onclick="filterProducts('clothing')">Clothing</button>
+      <button onclick="filterProducts('accessories')">Accessories</button>
+      <button onclick="filterProducts('furmitue')">furmitue</button>
+      <button onclick="filterProducts('toys')">Toys</button>
+      <button onclick="filterProducts('grocery')">grocery</button>
+      <button onclick="filterProducts('tv and appliance')">
+        tv and appilances
+      </button>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-grid">
+      <div
+        class="product"
+        data-category="electronics"
+        onclick="openModal(this)"
+      >
+        <img
+          src="https://tse3.mm.bing.net/th/id/OIP.RWeRn0ns6owRXMP0tsmPhgHaEK?rs=1&pid=ImgDetMain&o=7&rm=3"
+          alt="Phone"
+        />
+        <div class="info">
+          <h3>Smartphone</h3>
+          <p>Latest model with 5G</p>
+          <span>55000</span>
+        </div>
+      </div>
+      <div class="product" data-category="clothing" onclick="openModal(this)">
+        <img
+          src="https://images-cdn.ubuy.co.in/13GWS260-levi-39-s-men-39-s-faux-leather-sherpa.jpg"
+          alt="Jacket"
+        />
+        <div class="info">
+          <h3>Winter Jacket</h3>
+          <p>Warm and stylish</p>
+          <span>2000-4000</span>
+        </div>
+      </div>
+      <div
+        class="product"
+        data-category="accessories"
+        onclick="openModal(this)"
+      >
+        <img
+          src="https://tse3.mm.bing.net/th/id/OIP.AKASu-sdXjiPUlJIDUvrpQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
+          alt="Watch"
+        />
+        <div class="info">
+          <h3>Wrist Watch</h3>
+          <p>Classic leather design</p>
+          <span>1600</span>
+        </div>
+      </div>
+      <div class="product" data-category="furmitue" onclick="openModal(this)">
+        <img
+          src="https://tse3.mm.bing.net/th/id/OIP.-W6MgoiVSLYxlB2ot4j6MQHaD4?rs=1&pid=ImgDetMain&o=7&rm=3"
+          alt="home products"
+        />
+        <div class="info">
+          <h3>furmitue</h3>
+          <p>Lightweight and good design</p>
+          <span>1500-2000</span>
+        </div>
+      </div>
+      <div class="product" data-category="Toys" onclick="openModal(this)">
+        <img
+          src="https://imgix-prod.sgs.com/-/media/sgscorp/images/connectivity-and-products/children-toys.cdn.en-TH.1.jpg?fit=crop&crop=edges&auto=format&w=1200&h=630"
+          alt="Toys"
+        />
+        <div class="info">
+          <h3>Toys</h3>
+          <p>toys</p>
+          <span>120-1000</span>
+        </div>
+      </div>
+      <div class="product" data-category="grocery" onclick="openModal(this)">
+        <img
+          src="https://media.gq.com/photos/63bda8e0be39e2a40e48df7c/master/w_1600%2Cc_limit/misfits.jpg"
+          alt="grocery"
+        />
+        <div class="info">
+          <h3>grocery</h3>
+          <p>home grocery</p>
+          <span>20-200</span>
+        </div>
+      </div>
+      <div
+        class="product"
+        data-category="tv and appliance"
+        onclick="openModal(this)"
+      >
+        <img src="https://i.pinimg.com/originals/2a/43/e4/2a43e4b0ca973b99d49254b71b8f8aab.jpg" alt="tv and appliance" />
+        <div class="info">
+          <h3>tv and appliance</h3>
+          <p>TV AND APPLIANCEe</p>
+          <span>5000-10000</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="productModal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img id="modalImg" src="" alt="" />
+        <h2 id="modalTitle"></h2>
+        <p id="modalDesc"></p>
+        <span id="modalPrice"></span>
+      </div>
+    </div>
+
+    <script>
+      // Filtering
+      function filterProducts(category) {
+        let products = document.querySelectorAll(".product");
+        let buttons = document.querySelectorAll(".filters button");
+        buttons.forEach((btn) => btn.classList.remove("active"));
+        event.target.classList.add("active");
+
+        products.forEach((product) => {
+          if (category === "all" || product.dataset.category === category) {
+            product.style.display = "block";
+          } else {
+            product.style.display = "none";
+          }
+        });
+      }
+
+      // Modal
+      function openModal(product) {
+        document.getElementById("productModal").style.display = "flex";
+        document.getElementById("modalImg").src =
+          product.querySelector("img").src;
+        document.getElementById("modalTitle").innerText =
+          product.querySelector("h3").innerText;
+        document.getElementById("modalDesc").innerText =
+          product.querySelector("p").innerText;
+        document.getElementById("modalPrice").innerText =
+          product.querySelector("span").innerText;
+      }
+
+      function closeModal() {
+        document.getElementById("productModal").style.display = "none";
+      }
+
+      // Close modal on outside click
+      window.onclick = function (event) {
+        let modal = document.getElementById("productModal");
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      };
+    </script>
+  </body>
+</html>
